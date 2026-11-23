@@ -1,0 +1,30 @@
+* text=auto eol=lf
+
+# 二进制文件：不做行尾转换与文本 diff
+*.pdf binary
+*.zip binary
+*.rar binary
+*.7z binary
+*.exe binary
+*.dll binary
+*.lib binary
+*.hex binary
+*.bin binary
+*.bit binary
+*.dcp binary
+*.pth binary
+*.pt binary
+*.onnx binary
+*.pickle binary
+*.otf binary
+*.ttf binary
+*.docx binary
+*.xlsx binary
+*.pptx binary
+*.ms13 binary
+*.PcbDoc binary
+*.PcbLib binary
+*.SchDoc binary
+*.IntLib binary
+*.uvguix.* binary
+*.uvoptx binary
