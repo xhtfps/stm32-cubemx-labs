@@ -1,6 +1,38 @@
+<div align="center">
+
 # STM32 CubeMX 与标准库工程集
 
-STM32 学习过程中的工程集合：CubeMX 生成的 HAL 工程（LED / KEY / TIM / USART / ADC / FreeRTOS 等），以及一套标准外设库工程模板。用来对照“同一外设的 HAL 写法与 StdPeriph 写法差在哪”。
+**同一个外设，HAL 和 StdPeriph 各写一遍，差在哪一眼看出来**
+
+![platform](https://img.shields.io/badge/platform-STM32-0b5cad?style=flat-square)
+![toolchain](https://img.shields.io/badge/toolchain-CubeMX%20%2F%20Keil%20%2F%20CubeIDE-1f6feb?style=flat-square)
+![license](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+![last commit](https://img.shields.io/github/last-commit/xhtfps/stm32-cubemx-labs?style=flat-square)
+
+[怎么用](#2-怎么用) · [体积约定](#3-体积治理约定) · [全部仓库索引](https://github.com/xhtfps/xhtfps)
+
+</div>
+
+## 这个仓的用法
+
+不是拿来抄的代码库，而是**对照表**：同一个 LED/KEY/TIM/USART/ADC，左边看 `HAL_project` 的标准库写法，右边看 CubeMX 生成的 HAL 写法。差异最集中的两处——时钟使能与中断配置——对着看两遍就记住了。
+
+## 亮点
+
+- **每个 lab 带 `.ioc`**：想改配置就回 CubeMX 重新生成，不必手改 `Core/` 里的生成段落。
+- **clone 即可编译**：各 lab 自带 `Drivers/`（HAL + CMSIS），不依赖外部库路径。
+- **覆盖常用外设**：GPIO、USART、TIM、ADC、I2C、SPI、FreeRTOS，够撑起一个完整入门路径。
+- **只留有价值的文件**：重复 CMSIS 副本与 10 MB 逐文件清单已移除，仓库不再臃肿。
+
+## 结构
+
+```mermaid
+flowchart LR
+  STD["HAL_project<br/>标准外设库写法"] --> CMP{"同一外设<br/>对照"}
+  CMX["cube MX project/&lt;lab&gt;<br/>.ioc + 生成代码"] --> CMP
+  CMP --> K1["时钟使能差异"]
+  CMP --> K2["中断 / NVIC 配置差异"]
+```
 
 ## 1. 工程清单与对应外设
 
@@ -36,3 +68,19 @@ STM32 学习过程中的工程集合：CubeMX 生成的 HAL 工程（LED / KEY /
 - **完整台账**：[`notes/offload.json`](https://github.com/xhtfps/notes/blob/main/offload.json)（repo / path / size / base_commit）；恢复口径见 [`SLIM-PLAN.md`](https://github.com/xhtfps/xhtfps/blob/main/SLIM-PLAN.md)。
 
 clone 后发现某个文件不在，按台账里的 `base_commit` 打开 `https://github.com/xhtfps/<repo>/blob/<base_commit>/<path>` 取回即可，不要重复提交进仓。
+## 路线图
+
+- [x] 各 lab 的重复 CMSIS 副本清理，逐文件清单压成摘要
+- [x] 统一「一 lab 一目录 + 带 `.ioc`」的增量约定
+- [ ] 补一份「HAL vs StdPeriph 差异速查表」（时钟、GPIO、中断、DMA 四类）
+- [ ] 把常用 BSP 初始化收敛到 `bsp-libs`
+
+## 参与与反馈
+
+- 遇到问题请走 [Issue 模板](.github/ISSUE_TEMPLATE)，注明 lab 名称与 CubeMX / IDE 版本。
+- 提 PR 前先读 [CONTRIBUTING.md](CONTRIBUTING.md)；安全问题按 [SECURITY.md](SECURITY.md) 私下反馈。
+- 如果这个仓库帮你省过时间，点个 ⭐ 是最省事的支持。
+
+## 许可证
+
+本仓自写代码以 [MIT](LICENSE) 分发；ST HAL、CMSIS 与 CubeMX 生成代码按 ST 的许可条款使用。
