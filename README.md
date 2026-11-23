@@ -14,3 +14,12 @@ STM32 学习过程中的工程集：CubeMX 生成的 HAL 工程（LED / KEY / TI
 - 第三方资料版权归原作者，仅作学习参考。
 
 _由本地目录整理归档，10219 个文件。_
+
+## 大文件去哪了
+
+本仓已做过体积治理：大文件从当前分支移出，但历史提交完整保留，随时可取回。
+
+- **其它产物**：各 lab 重复的 CMSIS 副本 13 MB 与 10 MB 逐文件清单 CSV，提交 `91daec0d`。
+- **完整台账**：[`notes/offload.json`](https://github.com/xhtfps/notes/blob/main/offload.json)（repo / path / size / base_commit），恢复命令与口径见索引仓 [`SLIM-PLAN.md`](https://github.com/xhtfps/xhtfps/blob/main/SLIM-PLAN.md)。
+
+clone 后发现某个文件不在，按台账里的 `base_commit` 打开 `https://github.com/xhtfps/<repo>/blob/<base_commit>/<path>` 取回即可，不要重复提交进仓。
